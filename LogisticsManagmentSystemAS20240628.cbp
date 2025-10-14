@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Src/orders.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Src/shipments.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Src/vehicles.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="include/orders.h" />
+		<Unit filename="include/shipments.h" />
+		<Unit filename="include/vehicles.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
