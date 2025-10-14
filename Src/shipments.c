@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "shipments.h"
+#include "../include/shipments.h"
 
 void addCity()
 {
@@ -29,8 +29,8 @@ void saveRoutesToFile(char path[])
 {
 
 }
-void loadDeliveriesFromFile(char path[])
+int loadDeliveriesFromFile(char path[])
 {
-
+ return 0;
 }
 

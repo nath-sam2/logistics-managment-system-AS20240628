@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="LogisticsManagmentSystem.c.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="Src/orders.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -43,9 +46,6 @@
 		<Unit filename="include/orders.h" />
 		<Unit filename="include/shipments.h" />
 		<Unit filename="include/vehicles.h" />
-		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

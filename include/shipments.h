@@ -10,6 +10,6 @@ void displayCities();
 void editDistance();
 void displayDistanceTable();
 void saveRoutesToFile(char path[]);
-void loadRoutesFromFile(char path[]);
+int loadDeliveriesFromFile(char path[]);
 
 #endif // SHIPMENTS_H_INCLUDED
