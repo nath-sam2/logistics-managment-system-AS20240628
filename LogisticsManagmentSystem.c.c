@@ -12,6 +12,7 @@ int main()
     int choice;
 
     loadRoutesFromFile("data/routes.txt");
+    initializeVehicles();
 
     do{
         printf("\n=====Logistics Management System=====\n");
