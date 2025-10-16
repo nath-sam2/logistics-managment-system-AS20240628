@@ -141,7 +141,7 @@ void editDistance()
     int src, dest, dist;
     displayCities();
 
-    printf("Enter source city index: ");
+    printf("Enter source city index(0 to %d): ",currentCityCount-1);
     if(scanf("%d",&src)!=1)
     {
         while(getchar()!='\n');
@@ -149,7 +149,7 @@ void editDistance()
         return;
     }
 
-    printf("Enter destination city index: ");
+    printf("Enter destination city index(0 to %d): ",currentCityCount-1);
     if(scanf("%d",&dest)!=1)
     {
         while(getchar()!='\n');
@@ -197,21 +197,21 @@ void displayDistanceTable()
         return;
     }
 
-    printf("=====Distance Table (km)=====\n");
-    printf("%12s"," ");
+    printf("====================Distance Table (km)====================\n");
+    printf("%12s\t", "  ");
 
     for(int i = 0; i<currentCityCount; i++)
     {
-        printf("%10s",cities[i]);
+        printf("%10s\t",cities[i]);
     }
     printf("\n");
 
     for (int i = 0; i<currentCityCount; i++)
     {
-        printf("%10s",cities[i]);
+        printf("%10s\t",cities[i]);
         for(int j = 0; j<currentCityCount; j++)
         {
-            printf("%10d",distance[i][j]);
+            printf("%10d\t",distance[i][j]);
         }
         printf("\n");
     }
