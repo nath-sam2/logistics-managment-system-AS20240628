@@ -138,38 +138,53 @@ void editDistance()
         return;
     }
 
-    int i, j, d;
+    int src, dest, dist;
     displayCities();
 
-    printf("Enter initial city index: ");
-    scanf("%d", &i);
+    printf("Enter source city index: ");
+    if(scanf("%d",&src)!=1)
+    {
+        while(getchar()!='\n');
+        printf("Invalid input.\n");
+        return;
+    }
 
     printf("Enter destination city index: ");
-    scanf("%d", &j);
-
-    if(i<0 || j<0 || i >= currentCityCount || j>= currentCityCount)
+    if(scanf("%d",&dest)!=1)
     {
-        printf("invalid indexes!");
+        while(getchar()!='\n');
+        printf("Invalid input.\n");
         return;
     }
 
-    if(i==j)
+    if(src<0 || dest<0 || src >= currentCityCount || dest>= currentCityCount)
     {
-        printf("Same city\n");
+        printf("invalid index!");
         return;
     }
 
-    printf("Enter distance between %s and %s(km): ",cities[i]);
-    scanf("%d",&d);
-
-    if(d<=0)
+    if(src==dest)
     {
-        printf("Distance cannot be negative\n");
+        printf("Same city, therefore destination is 0.\n");
         return;
     }
 
-    distance[i][j]=d;
-    distance[j][i]=d;
+    printf("Enter distance between %s and %s(km): ",cities[src],cities[dest]);
+    if(scanf("%d",&dist)!=1)
+    {
+        while(getchar()!='\n');
+        printf("Invalid distance.\n");
+        return;
+    }
+
+    if(dist<=0)
+    {
+        printf("Distance cannot be negative!\n");
+        return;
+    }
+
+    distance[src][dest]=dist;
+    distance[dest][src]=dist;
 
     printf("Distance updated successfully!\n");
 }
@@ -200,4 +215,55 @@ void displayDistanceTable()
         }
         printf("\n");
     }
+}
+
+void saveRoutesToFile(char path[])
+{
+    FILE *fp = fopen(path, "w");
+    if (fp == NULL){
+        printf("Error: cannot open file to write!\n");
+    return;
+    }
+    fprintf(fp, "%d\n", currentCityCount);
+
+    for(int i = 0; i<currentCityCount; i++)
+    {
+        fprintf(fp, "%s\n", cities[i]);
+    }
+
+    for (int i = 0; i < currentCityCount; i++) {
+        for (int j = 0; j < currentCityCount; j++) {
+            fprintf(fp, "%d ", distance[i][j]);
+        }
+        fprintf(fp, "\n");
+    }
+
+    fclose(fp);
+    printf("Data saved successfully to %s!\n", path);
+}
+
+void loadRoutesFromFile(char path[]) {
+    FILE *fp = fopen(path, "r");
+    if (fp == NULL) {
+        printf("No saved data found (file missing), starting from zero.\n");
+        currentCityCount = 0;
+        return;
+    }
+    fscanf(fp, "%d\n", &currentCityCount);
+
+    for (int i = 0; i < currentCityCount; i++) {
+        fgets(cities[i], MAX_NAME_LEN, fp);
+
+        int len = strlen(cities[i]);
+        if (len > 0 && cities[i][len - 1] == '\n')
+            cities[i][len - 1] = '\0';
+    }
+    for (int i = 0; i < currentCityCount; i++) {
+        for (int j = 0; j < currentCityCount; j++) {
+            fscanf(fp, "%d", &distance[i][j]);
+        }
+    }
+
+    fclose(fp);
+    printf("Data loaded successfully from %s!\n", path);
 }

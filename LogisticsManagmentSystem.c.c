@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "include/shipments.h"
+#include "include/vehicles.h"
+#include "include/orders.h"
 
 void cityManagementMenu();
 void distanceManagementMenu();
@@ -7,6 +10,9 @@ void distanceManagementMenu();
 int main()
 {
     int choice;
+
+    loadRoutesFromFile("data/routes.txt");
+
     do{
         printf("\n=====Logistics Management System=====\n");
         printf("1. City Management\n");
@@ -28,19 +34,29 @@ int main()
             distanceManagementMenu();
             break;
         case 3:
+            displayVehicles();
             break;
         case 4:
+            createDelivery();
             break;
         case 5:
+            generateReports();
             break;
         case 6:
+            saveRoutesToFile("data/routes.txt");
             break;
         case 0:
+            printf("Saving before exit...\n");
+            saveRoutesToFile("data/routes.txt");
             printf("Exiting...\n");
             break;
         default:
             printf("Invalid Choice!\n");
         }
+        printf("\nPress Enter to continue...");
+        while (getchar() != '\n');
+        getchar();
+
     }while(choice != 0);
     return 0;
 }
