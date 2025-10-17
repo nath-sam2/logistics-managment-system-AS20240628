@@ -1,5 +1,5 @@
-#ifndef SHIPMENTS_H_INCLUDED
-#define SHIPMENTS_H_INCLUDED
+#ifndef SHIPMENTS_H
+#define SHIPMENTS_H
 
 #define MAX_CITIES 30
 #define MAX_NAME_LEN 50
@@ -18,4 +18,4 @@ void displayDistanceTable();
 void saveRoutesToFile(char path[]);
 void loadRoutesFromFile(char path[]);
 
-#endif // SHIPMENTS_H_INCLUDED
+#endif

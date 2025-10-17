@@ -1,7 +1,5 @@
-3
+2
 Colombo
-Jaffna
-Trincomalee
-0 350 0 
-350 0 300 
-0 300 0 
+Kandy
+0 115 
+115 0 

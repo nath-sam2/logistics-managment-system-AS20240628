@@ -20,7 +20,7 @@ int main()
         printf("2. Distance Management\n");
         printf("3. Vehicle Management\n");
         printf("4. Place a delivery\n");
-        printf("5. Reports\n");
+        printf("5. List Delivery Report\n");
         printf("6. Save Data\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
@@ -41,7 +41,7 @@ int main()
             createDelivery();
             break;
         case 5:
-            generateReports();
+            listDelivery();
             break;
         case 6:
             saveRoutesToFile("data/routes.txt");

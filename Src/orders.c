@@ -1,28 +1,133 @@
 #include <stdio.h>
+#include <string.h>
 #include "../include/orders.h"
+#include "../include/shipments.h"
+#include "../include/vehicles.h"
 
-void createDelivery()
-{
+int currentDeliveryCount=0;
+int deliverySource[MAX_DELIVERIES];
+int deliveryDestination[MAX_DELIVERIES];
+int deliveryVehicle[MAX_DELIVERIES];
+double deliveryWeight[MAX_DELIVERIES];
+double deliveryDistance[MAX_DELIVERIES];
+double deliveryFuelUsed[MAX_DELIVERIES];
+double deliveryFuelCost[MAX_DELIVERIES];
+double deliveryTime[MAX_DELIVERIES];
+double deliveryBaseCost[MAX_DELIVERIES];
+double deliveryTotalCost[MAX_DELIVERIES];
+double deliveryProfit[MAX_DELIVERIES];
+double deliveryCharge[MAX_DELIVERIES];
+char customerNames[MAX_DELIVERIES][MAX_LENGTH];
 
+
+void createDelivery() {
+    if (currentCityCount < 2) {
+        printf("At least 2 cities are required to create a delivery.\n");
+        return;
+    }
+
+    if (currentDeliveryCount >= MAX_DELIVERIES) {
+        printf("Delivery limit reached!\n");
+        return;
+    }
+
+    printf("\n--- Create New Delivery ---\n");
+    printf("Enter customer name: ");
+    scanf(" %s", customerNames[currentDeliveryCount]);
+
+    displayCities();
+    printf("Enter source city index: ");
+    scanf("%d", &deliverySource[currentDeliveryCount]);
+
+    printf("Enter destination city index: ");
+    scanf("%d", &deliveryDestination[currentDeliveryCount]);
+
+    if (deliverySource[currentDeliveryCount] < 0 || deliverySource[currentDeliveryCount] >= currentCityCount ||
+        deliveryDestination[currentDeliveryCount] < 0 || deliveryDestination[currentDeliveryCount] >= currentCityCount ||
+        deliverySource[currentDeliveryCount] == deliveryDestination[currentDeliveryCount])
+        {
+        printf("Invalid city selection!\n");
+        return;
+        }
+
+    displayVehicles();
+    printf("Enter vehicle index (0-%d): ", MAX_VEHICLES - 1);
+    scanf("%d", &deliveryVehicle[currentDeliveryCount]);
+
+    if (deliveryVehicle[currentDeliveryCount] < 0 || deliveryVehicle[currentDeliveryCount] >= MAX_VEHICLES)
+        {
+        printf("Invalid vehicle selection!\n");
+        return;
+        }
+
+    printf("Enter delivery weight (kg): ");
+    scanf("%lf", &deliveryWeight[currentDeliveryCount]);
+
+    if (deliveryWeight[currentDeliveryCount] > vehicleCapacity[deliveryVehicle[currentDeliveryCount]])
+        {
+        printf("Weight exceeds vehicle capacity! Delivery cannot be created.\n");
+        return;
+        }
+
+    calculateDeliveryCost(currentDeliveryCount);
+
+    printf("\nDelivery created successfully!\n");
+    printf("--------------------------------------\n");
+    printf("Distance (km): %.2f\n", deliveryDistance[currentDeliveryCount]);
+    printf("Time (hrs): %.2f\n", deliveryTime[currentDeliveryCount]);
+    printf("Fuel Used (L): %.2f\n", deliveryFuelUsed[currentDeliveryCount]);
+    printf("Fuel Cost (LKR): %.2f\n", deliveryFuelCost[currentDeliveryCount]);
+    printf("Base Delivery Cost: %.2f\n", deliveryBaseCost[currentDeliveryCount]);
+    printf("Total Operational: %.2f\n", deliveryTotalCost[currentDeliveryCount]);
+    printf("Profit (25%%): %.2f\n", deliveryProfit[currentDeliveryCount]);
+    printf("Customer Charge: %.2f\n", deliveryCharge[currentDeliveryCount]);
+    printf("--------------------------------------\n");
+
+    currentDeliveryCount++;
 }
+
+void calculateDeliveryCost(int i)
+{
+    int src = deliverySource[i];
+    int dest = deliveryDestination[i];
+    int vehicle = deliveryVehicle[i];
+    double W = deliveryWeight[i];
+    double D = distance[src][dest];
+    double R = vehicleRatePerKm[vehicle];
+    double S = vehicleSpeed[vehicle];
+    double E = vehicleFuelEfficiency[vehicle];
+    double F = 310.0;
+
+    deliveryDistance[i] = D;
+    deliveryTime[i] = D / S;
+    deliveryFuelUsed[i] = D / E;
+    deliveryFuelCost[i] = deliveryFuelUsed[i] * F;
+
+    deliveryBaseCost[i] = D * R * (1 + W / 10000.0);
+    deliveryTotalCost[i] = deliveryBaseCost[i] + deliveryFuelCost[i];
+    deliveryProfit[i] = deliveryBaseCost[i] * 0.25;
+    deliveryCharge[i] = deliveryTotalCost[i] + deliveryProfit[i];
+}
+
 void listDelivery()
 {
+if (currentDeliveryCount == 0) {
+        printf("No deliveries yet.\n");
+        return;
+    }
 
-}
-void saveDeliveriesToFile(char path[])
-{
+    printf("\n======= Delivery Summary =======\n");
+    printf("%-5s %-15s %-15s %-10s %-10s %-10s %-10s\n",
+           "No.", "Customer", "Vehicle", "Source", "Dest", "Cost(LKR)", "Charge(LKR)");
 
+    for (int i = 0; i < currentDeliveryCount; i++)
+        {
+        printf("%-5d %-15s %-15s %-10s %-10s %-10.2f %-10.2f\n",
+               i, customerNames[i],
+               vehicleNames[deliveryVehicle[i]],
+               cities[deliverySource[i]],
+               cities[deliveryDestination[i]],
+               deliveryTotalCost[i],
+               deliveryCharge[i]);
+        }
 }
-int loadDeliveriesFromFile(char path[])
-{
-    return 0;
-}
-void generateReports()
-{
-
-}
-double findLeastDistance(int src, int destination)
-{
-    return 0;
-}
-
