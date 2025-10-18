@@ -131,3 +131,61 @@ if (currentDeliveryCount == 0) {
                deliveryCharge[i]);
         }
 }
+
+void saveDeliveriesToFile(const char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error!\n");
+        return;
+    }
+
+    fprintf(fp, "%d\n", currentDeliveryCount);
+    for (int i = 0; i < currentDeliveryCount; i++) {
+        fprintf(fp, "%s|%d|%d|%d|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f|%.2f\n",
+                customerNames[i],
+                deliverySource[i],
+                deliveryDestination[i],
+                deliveryVehicle[i],
+                deliveryWeight[i],
+                deliveryDistance[i],
+                deliveryFuelUsed[i],
+                deliveryFuelCost[i],
+                deliveryTime[i],
+                deliveryBaseCost[i],
+                deliveryTotalCost[i],
+                deliveryProfit[i],
+                deliveryCharge[i]);
+    }
+
+    fclose(fp);
+    printf("Deliveries saved to file successfully.\n");
+}
+
+void loadDeliveriesFromFile(const char *filename) {
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("No existing delivery file found.\n");
+        return;
+    }
+
+    fscanf(fp, "%d\n", &currentDeliveryCount);
+    for (int i = 0; i < currentDeliveryCount; i++) {
+        fscanf(fp, "%s|%d|%d|%d|%lf|%lf|%lf|%lf|%lf|%lf|%lf|%lf|%lf\n",
+               customerNames[i],
+               &deliverySource[i],
+               &deliveryDestination[i],
+               &deliveryVehicle[i],
+               &deliveryWeight[i],
+               &deliveryDistance[i],
+               &deliveryFuelUsed[i],
+               &deliveryFuelCost[i],
+               &deliveryTime[i],
+               &deliveryBaseCost[i],
+               &deliveryTotalCost[i],
+               &deliveryProfit[i],
+               &deliveryCharge[i]);
+    }
+
+    fclose(fp);
+    printf("Loaded %d deliveries from file.\n", currentDeliveryCount);
+}

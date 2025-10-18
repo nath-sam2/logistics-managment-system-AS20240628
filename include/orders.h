@@ -22,5 +22,7 @@ char customerNames[MAX_DELIVERIES][MAX_LENGTH];
 void createDelivery();
 void listDelivery();
 void calculateDeliveryCost(int index);
+void saveDeliveriesToFile(const char *filename);
+void loadDeliveriesToFile(const char *filename);
 
 #endif
