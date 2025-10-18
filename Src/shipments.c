@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <float.h>
+#include <stdbool.h>
 #include "../include/shipments.h"
 
 char cities[MAX_CITIES][MAX_NAME_LEN];
@@ -267,3 +269,94 @@ void loadRoutesFromFile(char path[]) {
     fclose(fp);
     printf("Data loaded successfully from %s!\n", path);
 }
+
+int getMinDistanceIndex(double dist[], int visited[], int currentCityCount)
+{
+    double min = DBL_MAX;
+    int minIndex = -1;
+
+    for (int i = 0; i < currentCityCount; i++)
+    {
+        if (!visited[i] && dist[i] <= min)
+        {
+            min = dist[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+
+void findLeastDistanceRoute()
+{
+    if (currentCityCount < 2)
+        {
+        printf("Two cities required.\n");
+        return;
+    }
+
+    displayCities();
+
+    int src, dest;
+    printf("Enter source city index: ");
+    scanf("%d", &src);
+    printf("Enter destination city index: ");
+    scanf("%d", &dest);
+
+    if (src < 0 || src >= currentCityCount || dest < 0 || dest >= currentCityCount || src == dest) {
+        printf("Invalid selection.\n");
+        return;
+    }
+
+    double dist[100];
+    int visited[100];
+    int parent[100];
+
+    for (int i = 0; i < currentCityCount; i++)
+        {
+        dist[i] = DBL_MAX;
+        visited[i] = 0;
+        parent[i] = -1;
+    }
+
+    dist[src] = 0;
+
+    for (int count = 0; count < currentCityCount - 1; count++) {
+        int u = getMinDistanceIndex(dist, visited, currentCityCount);
+        if (u == -1) break;
+        visited[u] = 1;
+
+        for (int v = 0; v < currentCityCount; v++) {
+            if (!visited[v] && distance[u][v] > 0 &&
+                dist[u] + distance[u][v] < dist[v]) {
+                dist[v] = dist[u] + distance[u][v];
+                parent[v] = u;
+            }
+        }
+    }
+
+    if (dist[dest] == DBL_MAX) {
+        printf("No route found between %s and %s.\n", cities[src], cities[dest]);
+        return;
+    }
+
+    printf("\n===== Least-Distance Route =====\n");
+    printf("From: %s\n", cities[src]);
+    printf("To: %s\n", cities[dest]);
+    printf("Shortest Distance: %.2f km\n", dist[dest]);
+
+    printf("Route: ");
+    int path[100];
+    int count = 0;
+    int current = dest;
+    while (current != -1) {
+        path[count++] = current;
+        current = parent[current];
+    }
+
+    for (int i = count - 1; i >= 0; i--) {
+        printf("%s", cities[path[i]]);
+        if (i != 0) printf(" -> ");
+    }
+    printf("\n=================================\n");
+}
+

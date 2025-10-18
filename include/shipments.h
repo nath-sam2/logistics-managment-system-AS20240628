@@ -17,5 +17,7 @@ void displayDistanceTable();
 
 void saveRoutesToFile(char path[]);
 void loadRoutesFromFile(char path[]);
+void findLeastDistanceRoute();
+int getMinDistanceIndex(double dist[], int visited[], int currentCityCount);
 
 #endif

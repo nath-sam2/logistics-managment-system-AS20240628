@@ -22,10 +22,12 @@
 
 1760623441 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\vehicles.h
 
-1760622381 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\shipments.c
+1760785859 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\shipments.c
 	<stdio.h>
 	<string.h>
+	<float.h>
+	<stdbool.h>
 	"../include/shipments.h"
 
-1760676604 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\shipments.h
+1760783279 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\shipments.h
 
