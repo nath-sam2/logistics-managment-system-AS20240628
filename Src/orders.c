@@ -191,3 +191,61 @@ void loadDeliveriesFromFile(const char *filename) {
     fclose(fp);
     printf("Loaded %d deliveries from file.\n", currentDeliveryCount);
 }
+
+void showReports() {
+    if (currentDeliveryCount == 0) {
+        printf("\nNo deliveries have been completed yet.\n");
+        return;
+    }
+
+    double totalDistance = 0.0;
+    double totalTime = 0.0;
+    double totalRevenue = 0.0;
+    double totalProfit = 0.0;
+
+    double longestDistance = deliveryDistance[0];
+    double shortestDistance = deliveryDistance[0];
+    int longestIndex = 0;
+    int shortestIndex = 0;
+
+    for (int i = 0; i < currentDeliveryCount; i++) {
+        totalDistance += deliveryDistance[i];
+        totalTime += deliveryTime[i];
+        totalRevenue += deliveryCharge[i];
+        totalProfit += deliveryProfit[i];
+
+        if (deliveryDistance[i] > longestDistance) {
+            longestDistance = deliveryDistance[i];
+            longestIndex = i;
+        }
+
+        if (deliveryDistance[i] < shortestDistance) {
+            shortestDistance = deliveryDistance[i];
+            shortestIndex = i;
+        }
+    }
+
+    double avgTime = totalTime / currentDeliveryCount;
+
+    printf("\n========== PERFORMANCE REPORTS ==========\n");
+    printf("Total Deliveries Completed : %d\n", currentDeliveryCount);
+    printf("Total Distance Covered : %.2f km\n", totalDistance);
+    printf("Average Delivery Time : %.2f hours\n", avgTime);
+    printf("Total Revenue Earned : %.2f LKR\n", totalRevenue);
+    printf("Total Profit Gained : %.2f LKR\n", totalProfit);
+    printf("-----------------------------------------\n");
+    printf("Longest Route Completed:\n");
+    printf(" Customer: %s\n", customerNames[longestIndex]);
+    printf(" From %s -> %s (%.2f km)\n",
+           cities[deliverySource[longestIndex]],
+           cities[deliveryDestination[longestIndex]],
+           longestDistance);
+    printf("-----------------------------------------\n");
+    printf("Shortest Route Completed:\n");
+    printf(" Customer: %s\n", customerNames[shortestIndex]);
+    printf(" From %s -> %s (%.2f km)\n",
+           cities[deliverySource[shortestIndex]],
+           cities[deliveryDestination[shortestIndex]],
+           shortestDistance);
+    printf("=========================================\n");
+}

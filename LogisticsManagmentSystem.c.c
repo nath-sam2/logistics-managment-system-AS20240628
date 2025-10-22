@@ -24,7 +24,8 @@ int main()
         printf("5. List Delivery Report\n");
         printf("6. Find Least Distance\n");
         printf("7. Find Least Cost\n");
-        printf("8. Save Data\n");
+        printf("8. Reports\n");
+        printf("9. Save Data\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
@@ -51,6 +52,9 @@ int main()
         case 7:
             findLeastCostRoute();
         case 8:
+            showReports();
+            break;
+        case 9:
             saveRoutesToFile("data/routes.txt");
             saveDeliveriesToFile("data/deliveries.txt");
             printf("Changes saved successfully.\n");
@@ -135,3 +139,4 @@ void distanceManagementMenu()
                 }
             }while(distChoice !=0);
 }
+

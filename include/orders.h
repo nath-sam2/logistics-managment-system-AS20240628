@@ -24,5 +24,6 @@ void listDelivery();
 void calculateDeliveryCost(int index);
 void saveDeliveriesToFile(const char *filename);
 void loadDeliveriesToFile(const char *filename);
+void showReports();
 
 #endif
