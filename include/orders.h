@@ -27,5 +27,8 @@ void loadDeliveriesToFile(const char *filename);
 void showReports();
 void dataMaintenanceMenu();
 void clearAllDeliveries();
+void clearAllCities();
+void clearAllDistance();
+void resetEntireSystem();
 
 #endif

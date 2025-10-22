@@ -285,11 +285,98 @@ void clearAllDeliveries()
     }
 }
 
+void clearAllCities()
+{
+    char confirm;
+    printf("\nWARNING: This will permanently delete all city records.\n");
+    printf("Are you sure you want to continue? (y/n): ");
+    scanf(" %c", &confirm);
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        FILE *fp = fopen("data/cities.txt", "w");
+        if (fp == NULL)
+        {
+            printf("Error: Unable to access cities.txt file.\n");
+            return;
+        }
+        fclose(fp);
+
+        currentCityCount = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            strcpy(cities[i], "");
+        }
+
+        printf("All city data cleared successfully.\n");
+    }
+    else
+    {
+        printf("Operation canceled. No data deleted.\n");
+    }
+}
+
+void clearAllDistances()
+{
+    char confirm;
+    printf("\nWARNING: This will permanently delete all distance records.\n");
+    printf("Are you sure you want to continue? (y/n): ");
+    scanf(" %c", &confirm);
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        FILE *fp = fopen("data/distances.txt", "w");
+        if (fp == NULL)
+        {
+            printf("Error: Unable to access distances.txt file.\n");
+            return;
+        }
+        fclose(fp);
+
+        for (int i = 0; i < 100; i++)
+        {
+            for (int j = 0; j < 100; j++)
+            {
+                distance[i][j] = 0.0;
+            }
+        }
+
+        printf("All distance data cleared successfully.\n");
+    }
+    else
+    {
+        printf("Operation canceled. No data deleted.\n");
+    }
+}
+
+void resetEntireSystem()
+{
+    char confirm;
+    printf("\nWARNING: This will delete ALL data including cities, distances, and deliveries.\n");
+    printf("Are you sure you want to RESET the entire system? (y/n): ");
+    scanf(" %c", &confirm);
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        clearAllDeliveries();
+        clearAllCities();
+        clearAllDistances();
+        printf("\nSystem has been fully reset to default state.\n");
+    }
+    else
+    {
+        printf("Operation canceled. System not reset.\n");
+    }
+}
+
 void dataMaintenanceMenu()
 {
     int option;
     printf("\n========== DATA MAINTENANCE ==========\n");
     printf("1. Clear all delivery data\n");
+    printf("2. Clear all city data\n");
+    printf("3. Clear all distance data\n");
+    printf("4. Reset entire system\n");
     printf("0. Return to main menu\n");
     printf("Enter your choice: ");
     scanf("%d", &option);
@@ -299,6 +386,15 @@ void dataMaintenanceMenu()
         case 1:
             clearAllDeliveries();
             break;
+        case 2:
+            clearAllCities();
+            break;
+        case 3:
+            clearAllDistances();
+            break;
+        case 4:
+            resetEntireSystem();
+            break;
         case 0:
             printf("Returning to main menu.\n");
             break;
@@ -307,3 +403,4 @@ void dataMaintenanceMenu()
             break;
     }
 }
+
