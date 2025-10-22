@@ -249,3 +249,61 @@ void showReports() {
            shortestDistance);
     printf("=========================================\n");
 }
+
+void clearAllDeliveries()
+{
+    char confirm;
+    printf("\nWARNING: This will permanently delete all delivery records.\n");
+    printf("Are you sure you want to continue? (y/n): ");
+    scanf(" %c", &confirm);
+
+    if (confirm == 'y' || confirm == 'Y')
+    {
+        FILE *fp = fopen("data/deliveries.txt", "w");
+        if (fp == NULL)
+        {
+            printf("Error: Unable to access deliveries.txt file.\n");
+            return;
+        }
+        fclose(fp);
+
+        currentDeliveryCount = 0;
+        for (int i = 0; i < 100; i++)
+        {
+            strcpy(customerNames[i], "");
+            deliveryDistance[i] = 0;
+            deliveryTime[i] = 0;
+            deliveryCharge[i] = 0;
+            deliveryProfit[i] = 0;
+        }
+
+        printf("All delivery data cleared successfully.\n");
+    }
+    else
+    {
+        printf("Operation canceled. No data was deleted.\n");
+    }
+}
+
+void dataMaintenanceMenu()
+{
+    int option;
+    printf("\n========== DATA MAINTENANCE ==========\n");
+    printf("1. Clear all delivery data\n");
+    printf("0. Return to main menu\n");
+    printf("Enter your choice: ");
+    scanf("%d", &option);
+
+    switch (option)
+    {
+        case 1:
+            clearAllDeliveries();
+            break;
+        case 0:
+            printf("Returning to main menu.\n");
+            break;
+        default:
+            printf("Invalid choice.\n");
+            break;
+    }
+}

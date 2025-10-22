@@ -19,16 +19,17 @@ int main()
 
     do{
         printf("\n=====Logistics Management System=====\n");
-        printf("1. City Management\n");
-        printf("2. Distance Management\n");
-        printf("3. Vehicle Management\n");
-        printf("4. Place a delivery\n");
-        printf("5. List Delivery Report\n");
-        printf("6. Find Least Distance\n");
-        printf("7. Find Least Cost\n");
-        printf("8. Reports\n");
-        printf("9. Save Data\n");
-        printf("0. Exit\n");
+        printf("1.  City Management\n");
+        printf("2.  Distance Management\n");
+        printf("3.  Vehicle Management\n");
+        printf("4.  Place a delivery\n");
+        printf("5.  List Delivery Report\n");
+        printf("6.  Find Least Distance\n");
+        printf("7.  Find Least Cost\n");
+        printf("8.  Reports\n");
+        printf("9.  Save Data\n");
+        printf("10. Data Maintenance\n");
+        printf("0.  Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
 
@@ -63,10 +64,13 @@ int main()
             saveDistancesToFile("data/distances.txt");
             printf("Changes saved successfully.\n");
             break;
+        case 10:
+            dataMaintenanceMenu();
+            break;
         case 0:
             printf("Saving before exit...\n");
             saveRoutesToFile("data/routes.txt");
-            saveDeliveriesToFile("data/deliveries.txt");ssss
+            saveDeliveriesToFile("data/deliveries.txt");
             saveCitiesToFile("data/cities.txt");
             saveDistancesToFile("data/distances.txt");
             printf("Exiting...\n");
