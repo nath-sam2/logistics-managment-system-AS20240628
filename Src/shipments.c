@@ -3,6 +3,9 @@
 #include <float.h>
 #include <stdbool.h>
 #include "../include/shipments.h"
+#include "../include/vehicles.h"
+
+#define FUEL_PRICE 310.0
 
 char cities[MAX_CITIES][MAX_NAME_LEN];
 int distance[MAX_CITIES][MAX_CITIES];
@@ -360,3 +363,110 @@ void findLeastDistanceRoute()
     printf("\n=================================\n");
 }
 
+int getMinCostIndex(double cost[], int visited[], int currentCityCount)
+{
+    double min = DBL_MAX;
+    int minIndex = -1;
+    for (int i = 0; i < currentCityCount; i++) {
+        if (!visited[i] && cost[i] < min) {
+            min = cost[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+
+void findLeastCostRoute() {
+    if (currentCityCount < 2) {
+        printf("Two cities required.\n");
+        return;
+    }
+
+    displayCities();
+    int src, dest;
+    printf("Enter source city index: ");
+    scanf("%d", &src);
+    printf("Enter destination city index: ");
+    scanf("%d", &dest);
+
+    if (src < 0 || src >= currentCityCount || dest < 0 || dest >= currentCityCount || src == dest) {
+        printf("Invalid city selection.\n");
+        return;
+    }
+
+    displayVehicles();
+    int vehicle;
+    printf("Enter vehicle index (0-%d): ", MAX_VEHICLES - 1);
+    scanf("%d", &vehicle);
+
+    if (vehicle < 0 || vehicle >= MAX_VEHICLES) {
+        printf("Invalid selection.\n");
+        return;
+    }
+
+    double rate = vehicleRatePerKm[vehicle];
+    double efficiency = vehicleFuelEfficiency[vehicle];
+
+    double cost[100], dist[100];
+    int visited[100], parent[100];
+
+    for (int i = 0; i < currentCityCount; i++) {
+        cost[i] = DBL_MAX;
+        dist[i] = DBL_MAX;
+        visited[i] = 0;
+        parent[i] = -1;
+    }
+
+    cost[src] = 0;
+    dist[src] = 0;
+
+    for (int count = 0; count < currentCityCount - 1; count++) {
+        int u = getMinCostIndex(cost, visited, currentCityCount);
+        if (u == -1)
+            break;
+        visited[u] = 1;
+
+        for (int v = 0; v < currentCityCount; v++) {
+            if (!visited[v] && distance[u][v] > 0) {
+                double D = distance[u][v];
+
+                double deliveryCost = D * rate;
+                double fuelCost = (D / efficiency) * FUEL_PRICE;
+                double totalEdgeCost = deliveryCost + fuelCost;
+
+                if (cost[u] + totalEdgeCost < cost[v]) {
+                    cost[v] = cost[u] + totalEdgeCost;
+                    dist[v] = dist[u] + D;
+                    parent[v] = u;
+                }
+            }
+        }
+    }
+
+    if (cost[dest] == DBL_MAX) {
+        printf("No route found between %s and %s.\n", cities[src], cities[dest]);
+        return;
+    }
+
+    printf("\n===== Least-Cost Route =====\n");
+    printf("From: %s\n", cities[src]);
+    printf("To: %s\n", cities[dest]);
+    printf("Vehicle: %s\n", vehicleNames[vehicle]);
+    printf("Total Distance: %.2f km\n", dist[dest]);
+    printf("Estimated Cost: %.2f LKR\n", cost[dest]);
+
+    printf("Route: ");
+    int path[100];
+    int count = 0;
+    int current = dest;
+    while (current != -1) {
+        path[count++] = current;
+        current = parent[current];
+    }
+
+    for (int i = count - 1; i >= 0; i--) {
+        printf("%s", cities[path[i]]);
+        if (i != 0) printf(" -> ");
+    }
+    printf("\n=================================\n");
+}

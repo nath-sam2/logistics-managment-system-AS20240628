@@ -23,7 +23,8 @@ int main()
         printf("4. Place a delivery\n");
         printf("5. List Delivery Report\n");
         printf("6. Find Least Distance\n");
-        printf("7. Save Data\n");
+        printf("7. Find Least Cost\n");
+        printf("8. Save Data\n");
         printf("0. Exit\n");
         printf("Enter your choice: ");
         scanf("%d",&choice);
@@ -48,7 +49,11 @@ int main()
         case 6:
             findLeastDistanceRoute();
         case 7:
+            findLeastCostRoute();
+        case 8:
             saveRoutesToFile("data/routes.txt");
+            saveDeliveriesToFile("data/deliveries.txt");
+            printf("Changes saved successfully.\n");
             break;
         case 0:
             printf("Saving before exit...\n");

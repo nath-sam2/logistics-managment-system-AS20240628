@@ -4,6 +4,8 @@
 #include "../include/shipments.h"
 #include "../include/vehicles.h"
 
+#define FUEL_PRICE 310.0
+
 int currentDeliveryCount=0;
 int deliverySource[MAX_DELIVERIES];
 int deliveryDestination[MAX_DELIVERIES];
@@ -96,7 +98,7 @@ void calculateDeliveryCost(int i)
     double R = vehicleRatePerKm[vehicle];
     double S = vehicleSpeed[vehicle];
     double E = vehicleFuelEfficiency[vehicle];
-    double F = 310.0;
+    double F = FUEL_PRICE;
 
     deliveryDistance[i] = D;
     deliveryTime[i] = D / S;

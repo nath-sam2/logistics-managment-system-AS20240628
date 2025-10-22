@@ -20,4 +20,7 @@ void loadRoutesFromFile(char path[]);
 void findLeastDistanceRoute();
 int getMinDistanceIndex(double dist[], int visited[], int currentCityCount);
 
+void findLeastCostRoute();
+int getNameCostIndex(double cost[], int visited[], int currentCityCount);
+
 #endif
