@@ -14,6 +14,8 @@ int main()
     loadRoutesFromFile("data/routes.txt");
     initializeVehicles();
     loadDeliveriesFromFile("data/deliveries.txt");
+    loadCitiesFromFile("data/cities.txt");
+    loadDistancesFromFile("data/distances.txt");
 
     do{
         printf("\n=====Logistics Management System=====\n");
@@ -57,12 +59,16 @@ int main()
         case 9:
             saveRoutesToFile("data/routes.txt");
             saveDeliveriesToFile("data/deliveries.txt");
+            saveCitiesToFile("data/cities.txt");
+            saveDistancesToFile("data/distances.txt");
             printf("Changes saved successfully.\n");
             break;
         case 0:
             printf("Saving before exit...\n");
             saveRoutesToFile("data/routes.txt");
-            saveDeliveriesToFile("data/deliveries.txt");
+            saveDeliveriesToFile("data/deliveries.txt");ssss
+            saveCitiesToFile("data/cities.txt");
+            saveDistancesToFile("data/distances.txt");
             printf("Exiting...\n");
             break;
         default:

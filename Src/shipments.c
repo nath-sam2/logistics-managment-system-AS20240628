@@ -470,3 +470,82 @@ void findLeastCostRoute() {
     }
     printf("\n=================================\n");
 }
+
+void saveCitiesToFile(const char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL) {
+        printf("Error: Unable to save city data.\n");
+        return;
+    }
+
+    fprintf(fp, "%d\n", currentCityCount);
+    for (int i = 0; i < currentCityCount; i++)
+        {
+        fprintf(fp, "%s\n", cities[i]);
+        }
+
+    fclose(fp);
+    printf("Cities saved successfully to %s.\n", filename);
+}
+
+void loadCitiesFromFile(const char *filename) {
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL)
+        {
+        printf("No existing city data found. Starting fresh.\n");
+        return;
+        }
+
+    fscanf(fp, "%d\n", &currentCityCount);
+    for (int i = 0; i < currentCityCount; i++)
+        {
+        fgets(cities[i], 50, fp);
+        cities[i][strcspn(cities[i], "\n")] = '\0'; // remove newline
+        }
+
+    fclose(fp);
+    printf("Cities loaded successfully from %s.\n", filename);
+}
+
+void saveDistancesToFile(const char *filename) {
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL)
+        {
+        printf("Error: Unable to save distances.\n");
+        return;
+        }
+
+    fprintf(fp, "%d\n", currentCityCount);
+    for (int i = 0; i < currentCityCount; i++)
+        {
+        for (int j = 0; j < currentCityCount; j++)
+           {
+            fprintf(fp, "%.2f ", distance[i][j]);
+           }
+        fprintf(fp, "\n");
+        }
+
+    fclose(fp);
+    printf("Distances saved successfully to %s.\n", filename);
+}
+
+void loadDistancesFromFile(const char *filename)
+{
+    FILE *fp = fopen(filename, "r");
+    if (fp == NULL) {
+        printf("No existing distance data found. Starting fresh.\n");
+        return;
+    }
+
+    fscanf(fp, "%d\n", &currentCityCount);
+    for (int i = 0; i < currentCityCount; i++)
+        {
+        for (int j = 0; j < currentCityCount; j++)
+          {
+            fscanf(fp, "%lf", &distance[i][j]);
+          }
+        }
+
+    fclose(fp);
+    printf("Distances loaded successfully from %s.\n", filename);
+}

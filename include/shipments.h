@@ -23,4 +23,9 @@ int getMinDistanceIndex(double dist[], int visited[], int currentCityCount);
 void findLeastCostRoute();
 int getNameCostIndex(double cost[], int visited[], int currentCityCount);
 
+void saveCitiesToFile(const char *filename);
+void loadCitiesToFile(const char *filename);
+void saveDistancesToFile(const char *filename);
+void loadDistancesToFile(const char *filename);
+
 #endif
