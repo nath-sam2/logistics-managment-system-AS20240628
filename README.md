@@ -34,7 +34,7 @@ It calculates delivery cost, time, fuel usage, and profits based on distance and
 
 ### Folder Structure
 
-ogistics-management-system/
+'''logistics-management-system/
 │
 ├── src/ # All .c source files (implementation)
 │ ├── shipments.c # Handles cost, time, fuel, and backups
@@ -63,3 +63,4 @@ ogistics-management-system/
 ├── .gitignore # Git exclusions (build files, executables)
 │
 └── project.cbp # (Optional) Code::Blocks project file
+'''
