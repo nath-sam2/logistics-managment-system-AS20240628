@@ -1,0 +1,11 @@
+# Ignore compiled files
+
+*.exe
+*.o
+*.obj
+*.cbp
+*.depend
+*.layout
+
+# Ignore backup files
+data/*_backup.txt

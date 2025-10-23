@@ -34,33 +34,32 @@ It calculates delivery cost, time, fuel usage, and profits based on distance and
 
 ### Folder Structure
 
-'''logistics-management-system/
+## Project Structure
+
+```text
+logistics-management-system/
 │
 ├── src/ # All .c source files (implementation)
-│ ├── shipments.c # Handles cost, time, fuel, and backups
-│ ├── vehicles.c # Manages vehicle data (rate, speed, efficiency)
-│ ├── orders.c # Manages deliveries and file handling
+│   ├── shipments.c # Handles cost, time, fuel, and backups
+│   ├── vehicles.c # Manages vehicle data (rate, speed, efficiency)
+│   └── orders.c # Manages deliveries and file handling
 │
 ├── include/ # Header files (function prototypes and globals)
-│ ├── shipments.h
-│ ├── vehicles.h
-│ ├── orders.h
+│   ├── shipments.h
+│   ├── vehicles.h
+│   └── orders.h
 │
 ├── data/ # All data files (input/output and backups)
-│ ├── cities.txt # Stores city names
-│ ├── routes.txt # Stores shortest and least-cost path
-│ ├── distances.txt # Stores distance matrix
-│ ├── deliveries.txt # Stores delivery records
-│ ├── cities_backup.txt # Backup of cities.txt
-│ ├── distances_backup.txt # Backup of distances.txt
-│ ├── deliveries_backup.txt # Backup of deliveries.txt
-│ └── system_summary.txt # Auto-generated performance summary
+│   ├── cities.txt # Stores city names
+│   ├── routes.txt # Stores shortest and least-cost path
+│   ├── distances.txt # Stores distance matrix
+│   ├── deliveries.txt # Stores delivery records
+│   ├── cities_backup.txt # Backup of cities.txt
+│   ├── distances_backup.txt # Backup of distances.txt
+│   ├── deliveries_backup.txt # Backup of deliveries.txt
+│   └── system_summary.txt # Auto-generated performance summary
 │
 ├── LogisticsManagementSystem.c # Main program (menu + control flow)
-│
 ├── README.md # Documentation / project overview
-│
 ├── .gitignore # Git exclusions (build files, executables)
-│
 └── project.cbp # (Optional) Code::Blocks project file
-'''
