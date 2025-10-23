@@ -28,4 +28,6 @@ void loadCitiesToFile(const char *filename);
 void saveDistancesToFile(const char *filename);
 void loadDistancesToFile(const char *filename);
 
+void createSystemSummary();
+void createBackupFiles();
 #endif

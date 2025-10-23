@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1761133416 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\logisticsmanagmentsystem.c.c
+1761198526 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\logisticsmanagmentsystem.c.c
 	<stdio.h>
 	<stdlib.h>
 	"include/shipments.h"
 	"include/vehicles.h"
 	"include/orders.h"
 
-1761133296 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\orders.c
+1761134582 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\orders.c
 	<stdio.h>
 	<string.h>
 	"../include/orders.h"
@@ -22,7 +22,7 @@
 
 1760623441 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\vehicles.h
 
-1761131088 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\shipments.c
+1761198408 source:c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\src\shipments.c
 	<stdio.h>
 	<string.h>
 	<float.h>
@@ -30,5 +30,5 @@
 	"../include/shipments.h"
 	"../include/vehicles.h"
 
-1761130649 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\shipments.h
+1761197398 c:\users\perer\logistics-managment-system-as20240628\logisticsmanagmentsystemas20240628\include\shipments.h
 

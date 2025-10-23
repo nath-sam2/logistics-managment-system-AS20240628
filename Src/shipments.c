@@ -10,6 +10,10 @@
 char cities[MAX_CITIES][MAX_NAME_LEN];
 int distance[MAX_CITIES][MAX_CITIES];
 int currentCityCount=0;
+int currentDeliveryCount;
+double deliveryDistance[MAX_CITIES];
+double deliveryCharge[MAX_CITIES];
+double deliveryProfit[MAX_CITIES];
 
 char name[MAX_NAME_LEN];
 
@@ -548,4 +552,81 @@ void loadDistancesFromFile(const char *filename)
 
     fclose(fp);
     printf("Distances loaded successfully from %s.\n", filename);
+
+    printf("\n--- Debug: Distance Matrix ---\n");
+    for (int i = 0; i < currentCityCount; i++) {
+    for (int j = 0; j < currentCityCount; j++) {
+        printf("%d ", distance[i][j]);
+    }
+    printf("\n");
+}
+}
+
+void createSystemSummary()
+{
+    FILE *fp = fopen("data/system_summary.txt", "w");
+    if (fp == NULL) {
+        printf("Error: Unable to create system_summary.txt\n");
+        return;
+    }
+
+    int totalDistance = 0;
+    long totalRevenue = 0;
+    long totalProfit = 0;
+
+    for (int i = 0; i < currentDeliveryCount; i++)
+        {
+        totalDistance += deliveryDistance[i];
+        totalRevenue += deliveryCharge[i];
+        totalProfit += deliveryProfit[i];
+        }
+
+    fprintf(fp, "===== LOGISTICS SYSTEM SUMMARY =====\n");
+    fprintf(fp, "Total Cities: %d\n", currentCityCount);
+    fprintf(fp, "Total Deliveries: %d\n", currentDeliveryCount);
+    fprintf(fp, "Total Distance Covered: %d km\n", totalDistance);
+    fprintf(fp, "Total Revenue: %ld LKR\n", totalRevenue);
+    fprintf(fp, "Total Profit: %ld LKR\n", totalProfit);
+    fprintf(fp, "====================================\n");
+
+    fclose(fp);
+    printf("System summary file created successfully.\n");
+}
+
+void createBackupFiles()
+{
+    char *sourceFiles[3] = {
+        "data/cities.txt",
+        "data/distances.txt",
+        "data/deliveries.txt"
+    };
+
+    char *backupFiles[3] = {
+        "data/cities_backup.txt",
+        "data/distances_backup.txt",
+        "data/deliveries_backup.txt"
+    };
+
+    for (int i = 0; i < 3; i++) {
+        FILE *src = fopen(sourceFiles[i], "r");
+        FILE *dst = fopen(backupFiles[i], "w");
+
+        if (src == NULL || dst == NULL) {
+            printf("Warning: Unable to back up %s\n", sourceFiles[i]);
+            if (src) fclose(src);
+            if (dst) fclose(dst);
+            continue;
+        }
+
+        char ch;
+        while ((ch = fgetc(src)) != EOF) {
+            fputc(ch, dst);
+        }
+
+        fclose(src);
+        fclose(dst);
+        printf("Backup created for %s -> %s\n", sourceFiles[i], backupFiles[i]);
+    }
+
+    printf("All backup files updated successfully.\n");
 }

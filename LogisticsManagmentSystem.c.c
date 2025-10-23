@@ -62,6 +62,8 @@ int main()
             saveDeliveriesToFile("data/deliveries.txt");
             saveCitiesToFile("data/cities.txt");
             saveDistancesToFile("data/distances.txt");
+            createSystemSummary();
+            createBackupFiles();
             printf("Changes saved successfully.\n");
             break;
         case 10:
@@ -73,6 +75,8 @@ int main()
             saveDeliveriesToFile("data/deliveries.txt");
             saveCitiesToFile("data/cities.txt");
             saveDistancesToFile("data/distances.txt");
+            createSystemSummary();
+            createBackupFiles();
             printf("Exiting...\n");
             break;
         default:

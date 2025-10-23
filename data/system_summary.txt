@@ -1,0 +1,7 @@
+===== LOGISTICS SYSTEM SUMMARY =====
+Total Cities: 5
+Total Deliveries: 3
+Total Distance Covered: 450 km
+Total Revenue: 81450 LKR
+Total Profit: 9315 LKR
+====================================
