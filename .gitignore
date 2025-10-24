@@ -1,11 +1,25 @@
-# Ignore compiled files
-
+# Ignore build and compiled files
 *.exe
 *.o
 *.obj
-*.cbp
-*.depend
 *.layout
+*.depend
 
-# Ignore backup files
+# Ignore Code::Blocks generated folders
+bin/
+obj/
+
+# Ignore backup and temporary files
 data/*_backup.txt
+data/system_summary.txt
+
+# Ignore Code::Blocks project metadata (optional)
+*.cbp
+*.layout
+*.depend
+
+# Ignore editor-specific files
+*.swp
+*.bak
+*.tmp
+*.log
