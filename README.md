@@ -33,7 +33,6 @@ It calculates delivery cost, time, fuel usage, and profits based on distance and
 - Menu-driven structure
 
 ### Folder Structure
-
 ## Project Structure
 
 ```text
@@ -63,3 +62,4 @@ logistics-management-system/
 ├── README.md # Documentation / project overview
 ├── .gitignore # Git exclusions (build files, executables)
 └── project.cbp # (Optional) Code::Blocks project file
+
